@@ -4,24 +4,24 @@
 
 // 时辰 → 经络名称与图片映射
 const meridians = [
-  { name: '胆经',  start: 1, end: 3, img: 'images/1_dan.png', desc: '子时，胆经旺，宜入眠养胆，修复机体。' },
-  { name: '肝经',  start: 3, end: 5,  img: 'images/2_gan.png', desc: '丑时，肝经旺，宜熟睡解毒，让气血调畅。' },
-  { name: '肺经',  start: 5, end: 7,  img: 'images/3_fei.png', desc: '寅时，肺经旺，宜深呼吸，促进气体交换。' },
-  { name: '大肠经', start: 7, end: 9, img: 'images/4_dachang.png' , desc: '卯时，大肠经旺，宜排便清理体内废物。' },
-  { name: '胃经',  start: 9, end: 11, img: 'images/5_wei.png' , desc: '辰时，胃经旺，宜进食早餐，补充能量。' },
-  { name: '脾经',  start: 11, end: 13, img: 'images/6_pi.png' , desc: '巳时，脾经旺，宜消化吸收，增强体质。' },
-  { name: '心经',  start: 13, end: 15, img: 'images/7_xin.png', desc: '午时，心经旺，宜心情舒畅，促进血液循环。' },
-  { name: '小肠经', start: 15, end: 17, img: 'images/8_xiaochang.png', desc: '未时，小肠经旺，宜吸收营养，排除废物。' },
-  { name: '膀胱经', start: 17, end: 19, img: 'images/9_pangguang.png', desc: '申时，膀胱经旺，宜排尿，清除体内毒素。' },
-  { name: '肾经',  start: 19, end: 21, img: 'images/10_shen.png', desc: '酉时，肾经旺，宜休息养肾，增强体力。' },
-  { name: '心包经', start: 21, end: 22, img: 'images/11_xinbao.png', desc: '戌时，心包经旺，宜调节情绪，保护心脏。' },
-  { name: '三焦经', start: 23, end: 1, img: 'images/12_sanjiao.png', desc: '亥时，三焦经旺，宜放松身心，促进代谢。' },
+  { name: '肝经',  start: 1, end: 3, img: 'images/1_dan.png', desc: '子时，肝经旺，宜入眠养胆，修复机体。' },
+  { name: '肺经',  start: 3, end: 5,  img: 'images/2_gan.png', desc: '丑时，肺经旺，宜熟睡解毒，让气血调畅。' },
+  { name: '大肠经',  start: 5, end: 7,  img: 'images/3_fei.png', desc: '寅时，大肠经旺，宜深呼吸，促进气体交换。' },
+  { name: '胃经', start: 7, end: 9, img: 'images/4_dachang.png' , desc: '卯时，胃经旺，宜排便清理体内废物。' },
+  { name: '脾经',  start: 9, end: 11, img: 'images/5_wei.png' , desc: '辰时，脾经旺，宜进食早餐，补充能量。' },
+  { name: '心经',  start: 11, end: 13, img: 'images/6_pi.png' , desc: '巳时，心经旺，宜消化吸收，增强体质。' },
+  { name: '小肠经',  start: 13, end: 15, img: 'images/7_xin.png', desc: '午时，小肠经旺，宜心情舒畅，促进血液循环。' },
+  { name: '膀胱经', start: 15, end: 17, img: 'images/8_xiaochang.png', desc: '未时，膀胱经旺，宜吸收营养，排除废物。' },
+  { name: '肾经', start: 17, end: 19, img: 'images/9_pangguang.png', desc: '申时，肾经旺，宜排尿，清除体内毒素。' },
+  { name: '心包经',  start: 19, end: 21, img: 'images/10_shen.png', desc: '酉时，心包经旺，宜休息养肾，增强体力。' },
+  { name: '三焦经', start: 21, end: 22, img: 'images/11_xinbao.png', desc: '戌时，三焦经旺，宜调节情绪，保护心脏。' },
+  { name: '胆经', start: 23, end: 1, img: 'images/12_sanjiao.png', desc: '亥时，胆经旺，宜放松身心，促进代谢。' },
 ];
 
 // 根据当前小时确定时辰与经络
 function getCurrentMeridian() {
   const h = new Date().getHours();
-  return meridians.find(m => {
+  return meridians.find(m => {        
     if (m.start > m.end) { 
       // 处理跨年/跨天逻辑（如 23 到 1 点）
       return h >= m.start || h < m.end;
