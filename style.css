@@ -1,43 +1,36 @@
-/* ================================
-   基础布局与配色
-   ================================ */
+/* ========== 全局设置 ========== */
 body {
   margin: 0;
   padding: 0;
   font-family: "Noto Serif SC", "SimHei", serif;
-  background: #f9f5f0;
+  /* background: #79562b; */
   color: #442;
-  overflow: hidden;
+  overflow-y: auto;
   height: 100vh;
 }
 
-/* 背景柔和流动的渐变动画 */
-#background-animation {
+/* 背景动态层（Canvas） */
+#flow-bg {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 50% 20%, #fceadc, #f9f5f0);
-  animation: floatBg 30s ease-in-out infinite alternate;
-  z-index: -1;
+  /* background: radial-gradient(circle at 50% 20%, #fceadc, #f9f5f0); */
+  /* animation: floatBg 30s ease-in-out infinite alternate; */
+  z-index: -2;
+  pointer-events: none; /* 确保不影响点击 */
 }
 
-@keyframes floatBg {
-  from { background-position: left top; }
-  to { background-position: right bottom; }
-}
-
-/* ================================
-   主容器与排版
-   ================================ */
+/* ========== 布局 ========== */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  text-align: center;
+  min-height: 100vh;
+  padding: 20px 0; /* 增加上下内边距，防止贴边 */
+  box-sizing: border-box;
 }
 
 header h1 {
@@ -47,9 +40,8 @@ header h1 {
 }
 
 header p {
-  margin-top: 0.5rem;
-  font-size: 1rem;
-  color: #666;
+  margin: 0.5rem 0;
+  color: #555;
 }
 
 /* ================================
@@ -59,15 +51,39 @@ main {
   margin-top: 2rem;
   position: relative;
 }
+/* ========== 图片与导航按钮 ========== */
+.meridian-display {
+  position: relative;
+  margin-top: 1rem;
+}
 
 #meridian-img {
   width: 260px;
   max-width: 70vw;
-  transition: opacity 1s ease;
   border-radius: 12px;
+  transition: opacity 1s;
+  background: #fff;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   background: #fffefe;
 }
+
+.nav-btn {
+  background: #e9ddd1;
+  border: none;
+  padding: 8px 16px;
+  margin: 10px;
+  border-radius: 20px;
+  color: #533;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: all 0.3s;
+}
+.nav-btn:hover {
+  background: #d4c3b5;
+  transform: scale(1.05);
+}
+
 .desc {
   margin-top: 1rem;
   max-width: 80%;
@@ -79,7 +95,93 @@ main {
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
   line-height: 1.6;
 }
-body.night {
-  background: #1b1b1b;
-  color: #f0e8d8;
+/* ========== 节律提示语 ========== */
+#quote {
+  margin-top: 10px;
+  font-style: italic;
+  color: #655;
+  transition: opacity 1s;
 }
+
+/* ========== 信息卡弹窗 ========== */
+#info-card {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #ddc;
+  border-radius: 8px;
+  padding: 1rem;
+  width: 80%;
+  max-width: 320px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.hidden { display: none; }
+
+#info-card h3 {
+  margin-top: 0;
+  color: #442;
+  font-size: 1.1rem;
+}
+#close-info {
+  background: #ddd2c6;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+/* =======================
+   五行主题层样式
+   ======================= */
+#theme-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--theme-color, #f9f5f0);
+  transition: background-color 1.5s ease;
+  z-index: -3; /* 在背景气流Canvas之下 */
+}
+/* =======================
+   五行主题层样式
+   ======================= */
+#theme-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2; /* 在背景气流Canvas之下 */
+  background-color: var(--theme-color, #f9f5f0);
+  transition: background-color 1.5s ease;
+}
+
+/* 针对屏幕宽度小于 600px 的设备（手机） */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.5rem; /* 调小标题 */
+  }
+
+  #meridian-img {
+    width: 200px; /* 调小图片宽度 */
+    max-width: 60vw;
+  }
+
+  .nav-btn {
+    padding: 6px 12px; /* 调小按钮 */
+    font-size: 0.85rem;
+  }
+
+  .desc {
+    font-size: 0.85rem; /* 调小描述文字 */
+    width: 90%; /* 让文字区域更宽一点 */
+  }
+
+  main {
+    margin-top: 1rem; /* 缩小间距 */
+  }
+}
+
+/* ========== 动画背景风流线效果（通过 JS 绘制） ========== */

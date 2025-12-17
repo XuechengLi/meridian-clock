@@ -7,17 +7,39 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="background-animation"></div>
+  <div id="theme-overlay"></div>
+
+  <!-- 背景动态动画层 -->
+  <canvas id="flow-bg"></canvas>
 
   <div class="container">
     <header>
       <h1>经络时钟</h1>
       <p id="time-info">北京时间加载中...</p>
+      <!-- 倒计时提示 -->
+      <p id="countdown">下个时辰剩余：-- 分 -- 秒</p>
     </header>
 
     <main>
-      <img id="meridian-img" src="images/default.png" alt="经络图" />
-      <p id="meridian-desc" class="desc"></p>
+      <!-- 手动切换按钮 -->
+      <button id="prev-btn" class="nav-btn">← 上一时辰</button>
+      
+      <div class="meridian-display">
+        <!-- 经络图 -->
+        <img id="meridian-img" src="images/default.png" alt="经络图" />
+        <!-- 节律提示语 -->
+        <p id="quote">经络感应，气行百脉。</p>
+        <p id="meridian-desc" class="desc"></p>
+      </div>
+
+      <button id="next-btn" class="nav-btn">下一时辰 →</button>
+
+      <!-- 经络信息卡（点击图像弹出） -->
+      <div id="info-card" class="hidden">
+        <h3 id="info-title"></h3>
+        <p id="info-desc"></p>
+        <button id="close-info">关闭</button>
+      </div>
     </main>
   </div>
 
