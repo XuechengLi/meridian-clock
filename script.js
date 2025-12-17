@@ -228,3 +228,4 @@ setInterval(() => {
 }, 2 * 60 * 60 * 1000); // 每两个小时更新（你可调短试验）
 
 // 每秒更新倒计时
+setInterval(updateCountdown, 1000);

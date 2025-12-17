@@ -1,13 +1,14 @@
 /* ========== 全局设置 ========== */
 body {
   margin: 0;
-  padding: 0;
+  padding: env(safe-area-inset-top) 0 0 0; /* 顶部安全区适配 iPhone 刘海屏 */
   font-family: "Noto Serif SC", "SimHei", serif;
-  /* background: #79562b; */
   color: #442;
-  overflow-y: auto;
-  height: 100vh;
+  overflow-y: auto;   /* 允许滚动 */
+  min-height: 100vh;  /* 不固定高度，改为最小高度 */
+  box-sizing: border-box;
 }
+
 
 /* 背景动态层（Canvas） */
 #flow-bg {
@@ -27,11 +28,13 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; /* ⬅ 内容从上方开始排列 */
   min-height: 100vh;
-  padding: 20px 0; /* 增加上下内边距，防止贴边 */
+  padding: 40px 10px 20px; /* ⬆️ 增加顶部间距 */
   box-sizing: border-box;
+  text-align: center; 
 }
+
 
 header h1 {
   margin: 0;
@@ -58,11 +61,12 @@ main {
 }
 
 #meridian-img {
+  display: block;           /* 避免 inline 图片底部空白 */
+  margin: 0 auto;
   width: 260px;
   max-width: 70vw;
   border-radius: 12px;
   transition: opacity 1s;
-  background: #fff;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   background: #fffefe;
 }
@@ -78,15 +82,20 @@ main {
   font-weight: bold;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   transition: all 0.3s;
+  text-align: center; 
 }
 .nav-btn:hover {
   background: #d4c3b5;
   transform: scale(1.05);
 }
-
+.nav-btn-group {
+  text-align: center;        /* ⬅️ 包裹按钮的容器也居中（若有分组容器） */
+  width: 100%;
+}
 .desc {
-  margin-top: 1rem;
+  margin-top: 1rem auto 0;
   max-width: 80%;
+  text-align: center;
   font-size: 0.95rem;
   color: #5a4632;
   background: rgba(255, 255, 255, 0.6);
@@ -116,6 +125,7 @@ main {
   width: 80%;
   max-width: 320px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  text-align: center; /* 居中文字 */
 }
 .hidden { display: none; }
 
@@ -160,8 +170,10 @@ main {
 
 /* 针对屏幕宽度小于 600px 的设备（手机） */
 @media (max-width: 600px) {
+  
   header h1 {
     font-size: 1.5rem; /* 调小标题 */
+    text-align: center;
   }
 
   #meridian-img {
@@ -172,15 +184,27 @@ main {
   .nav-btn {
     padding: 6px 12px; /* 调小按钮 */
     font-size: 0.85rem;
+    display: inline-block;
+    margin: 0.5rem;
   }
 
   .desc {
     font-size: 0.85rem; /* 调小描述文字 */
     width: 90%; /* 让文字区域更宽一点 */
+    margin: 1rem auto;
+    text-align: center;
   }
 
   main {
     margin-top: 1rem; /* 缩小间距 */
+  }
+  header {
+    margin-top: 10px;  /* 让顶部有空隙 */
+  }
+
+  .container {
+    padding: 20px 10px 10px;
+    text-align: center;
   }
 }
 
